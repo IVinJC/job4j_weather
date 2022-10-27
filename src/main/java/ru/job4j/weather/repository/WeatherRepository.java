@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentHashMap;
 @Repository
 public class WeatherRepository {
     private final Map<Integer, Weather> weathers = new ConcurrentHashMap<>();
-
     {
         weathers.put(1, new Weather(1, "Lvov", 20));
         weathers.put(2, new Weather(2, "SPb", 15));
@@ -30,7 +29,9 @@ public class WeatherRepository {
     }
 
     public Mono<Weather> hottest() {
-        return Mono.justOrEmpty(weathers.values().stream().max(Comparator.comparingInt(Weather::getTemperature)));
+        return Mono.justOrEmpty(weathers.values()
+                .stream()
+                .max(Comparator.comparingInt(Weather::getTemperature)));
     }
 
     public Flux<Weather> citiesMoreThenTemperatures(int temperature) {

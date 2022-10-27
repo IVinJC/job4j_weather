@@ -21,12 +21,10 @@ public class WeatherController {
         this.weatherService = weatherService;
     }
 
-
     /**
      * Метод all использует задержку публикации данных. Сделано это для демонстрации сервиса с долгой загрузкой.
      * @return Flux
      */
-
     @GetMapping(value = "/all", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
     public Flux<Weather> all() {
         Flux<Weather> data = weatherService.all();
